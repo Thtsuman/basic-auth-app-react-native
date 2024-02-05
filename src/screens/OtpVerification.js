@@ -1,23 +1,43 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import {Background} from '../containers';
 import {Fonts, Metrics} from '../assets/theme';
-import {LoginForm} from '../components';
+import {Link, OtpVerifyForm} from '../components';
 import {useTheme} from 'react-native-paper';
+import {ScreensName} from '.';
+import {useHistory} from '../hooks';
 
-export function Login() {
+export function OtpVerification() {
   const theme = useTheme();
   const styles = makeStyles(theme);
+  const {handleNavigation} = useHistory();
+
+  const showAlert = () => {
+    Alert.alert('', 'OTP Send');
+  };
+
   return (
     <Background>
       <View style={styles.loginContainer}>
         <View style={styles.heroContainer}>
-          <Text style={styles.heading}>Login</Text>
+          <Text style={styles.heading}>Verification</Text>
           <Text style={styles.subHeading}>
-            Welcome Back, Login with your phone number
+            Please enter the One Time Password we send to your phone number.
           </Text>
         </View>
-        <LoginForm />
+        <OtpVerifyForm />
+        <View style={styles.formFooter}>
+          <Link
+            onPress={showAlert}
+            linkLabel="Resend OTP"
+            linkLabelColor={theme.colors.background}
+          />
+          <Link
+            onPress={() => handleNavigation(ScreensName.Login)}
+            linkLabel="Change phone number?"
+            linkLabelColor={theme.colors.background}
+          />
+        </View>
       </View>
     </Background>
   );
@@ -52,5 +72,10 @@ const makeStyles = theme =>
     heroContainer: {
       marginTop: 70,
       paddingBottom: 20,
+    },
+    formFooter: {
+      alignItems: 'flex-end',
+      paddingRight: 10,
+      paddingTop: 10,
     },
   });

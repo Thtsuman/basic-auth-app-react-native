@@ -1,16 +1,19 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HomeScreen, Login, ScreensName, SignUp} from '../screens';
+import {HomeScreen, Login, ScreensName, OtpVerification} from '../screens';
 
 const Stack = createNativeStackNavigator();
 
 export function NavigationWrapper() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator initialRouteName={ScreensName.OtpVerification} screenOptions={{headerShown: false}}>
         <Stack.Screen name={ScreensName.Home} component={HomeScreen} />
         <Stack.Screen name={ScreensName.Login} component={Login} />
-        <Stack.Screen name={ScreensName.SignUp} component={SignUp} />
+        <Stack.Screen
+          name={ScreensName.OtpVerification}
+          component={OtpVerification}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,26 +1,36 @@
-import {Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React from 'react';
-import {Fonts} from '../../assets/theme';
+import {Button as ButtonComp, useTheme} from 'react-native-paper';
 
-export function Button({bgColor, btnLabel, btnLabelColor, onPress}) {
+export function Button({btnLabel, theme = 'primary', onPress}) {
+  const rnTheme = useTheme();
+  const styles = makeStyles(rnTheme);
   return (
-    <TouchableOpacity onPress={onPress} style={styles.buttonWrapper(bgColor)}>
-      <Text style={styles.btnLabelWrapper(btnLabelColor)}>{btnLabel}</Text>
-    </TouchableOpacity>
+    <ButtonComp
+      onPress={onPress}
+      style={[
+        styles.buttonWrapper,
+        theme === 'primary' && styles.primaryButton,
+        theme === 'secondary' && styles.secondaryButton,
+      ]}
+      mode="contained">
+      {btnLabel}
+    </ButtonComp>
   );
 }
 
-const styles = StyleSheet.create({
-  buttonWrapper: bgColor => ({
-    backgroundColor: bgColor,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginVertical: 10,
-    padding: 10,
-  }),
-  btnLabelWrapper: btnLabelColor => ({
-    color: btnLabelColor,
-    fontSize: Fonts.size.font16,
-    fontWeight: Fonts.weight.bold,
-  }),
-});
+const makeStyles = theme =>
+  StyleSheet.create({
+    buttonWrapper: {
+      marginVertical: 10,
+      borderRadius: 10,
+    },
+    primaryButton: {
+      backgroundColor: theme.colors.customPrimary,
+      textColor: theme.colors.onCustomPrimary,
+    },
+    secondaryButton: {
+      backgroundColor: theme.colors.customSecondary,
+      textColor: theme.colors.onCustomSecondary,
+    },
+  });

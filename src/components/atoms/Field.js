@@ -1,24 +1,29 @@
-import {View, Text, TextInput, StyleSheet} from 'react-native';
-import React from 'react';
-import {Colors} from '../../assets/theme';
+import {StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {TextInput, useTheme} from 'react-native-paper';
 
-export function Field(props) {
+export function Field({label, placeholder, ...restProps}) {
+  const theme = useTheme();
+  const styles = makeStyles(theme);
+  const [text, setText] = useState('');
   return (
     <TextInput
-      {...props}
+      mode="outlined"
+      label={label}
+      placeholder={placeholder}
+      value={text}
+      onChangeText={text => setText(text)}
       style={styles.textInputContainer}
-      placeholderTextColor={Colors.offBlack}>
-    </TextInput>
+      {...restProps}
+    />
   );
 }
 
-const styles = StyleSheet.create({
-  textInputContainer: {
-    backgroundColor: Colors.white,
-    borderRadius: 10,
-    color: Colors.primary,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    marginVertical: 5,
-  },
-});
+const makeStyles = theme =>
+  StyleSheet.create({
+    textInputContainer: {
+      borderRadius: 10,
+      marginVertical: 5,
+      borderColor: theme.colors.customPrimary,
+    },
+  });

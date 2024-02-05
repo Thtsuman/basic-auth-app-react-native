@@ -1,5 +1,5 @@
 export {colors} from './theme';
 
 export const images = {
-  background: require('./images/beach.jpg'),
+  background: require('./images/gradient.jpg'),
 };

@@ -1,16 +1,16 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Background} from '../containers';
-import {Colors, Fonts, Metrics} from '../assets/theme';
+import {Fonts, Metrics} from '../assets/theme';
 import {Button} from '../components';
 import {ScreensName} from '.';
+import {useTheme} from 'react-native-paper';
+import {useHistory} from '../hooks';
 
-export function HomeScreen(props) {
-  const {navigation} = props;
-
-  const handleNavigation = page => {
-    navigation.navigate(page);
-  };
+export function HomeScreen() {
+  const theme = useTheme();
+  const styles = makeStyles(theme);
+  const {handleNavigation} = useHistory();
 
   return (
     <Background>
@@ -25,16 +25,9 @@ export function HomeScreen(props) {
         </View>
         <View>
           <Button
-            bgColor={Colors.primary}
+            theme="primary"
             btnLabel={'Login'}
-            btnLabelColor={Colors.white}
             onPress={() => handleNavigation(ScreensName.Login)}
-          />
-          <Button
-            bgColor={Colors.white}
-            btnLabel={'Sign Up'}
-            btnLabelColor={Colors.secondary}
-            onPress={() => handleNavigation(ScreensName.SignUp)}
           />
         </View>
       </View>
@@ -42,27 +35,28 @@ export function HomeScreen(props) {
   );
 }
 
-const styles = StyleSheet.create({
-  homeContainer: {
-    width: Metrics.screenWidth,
-    height: Metrics.screenHeight,
-    paddingHorizontal: 20,
-    paddingVertical: 50,
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  heading: {
-    color: Colors.white,
-    fontSize: Fonts.size.font40,
-    fontWeight: Fonts.weight.bold,
-    paddingVertical: 10,
-  },
-  subHeading: {
-    color: Colors.offWhite,
-    fontSize: Fonts.size.font16,
-    paddingVertical: 10,
-  },
-  heroContainer: {
-    marginTop: 70,
-  },
-});
+const makeStyles = theme =>
+  StyleSheet.create({
+    homeContainer: {
+      width: Metrics.screenWidth,
+      height: Metrics.screenHeight,
+      paddingHorizontal: 20,
+      paddingVertical: 50,
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    heading: {
+      color: theme.colors.white,
+      fontSize: Fonts.size.font40,
+      fontWeight: Fonts.weight.bold,
+      paddingVertical: 10,
+    },
+    subHeading: {
+      color: theme.colors.surfaceVariant,
+      fontSize: Fonts.size.font16,
+      paddingVertical: 10,
+    },
+    heroContainer: {
+      marginTop: 70,
+    },
+  });

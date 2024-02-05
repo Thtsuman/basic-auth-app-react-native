@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#000000bb'
+    backgroundColor: '#00000088'
   }
 });

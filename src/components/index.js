@@ -1,2 +1,2 @@
 export {Button, Field, Link} from './atoms';
-export {LoginForm, SignupForm} from './templates';
+export {LoginForm, OtpVerifyForm} from './templates';
