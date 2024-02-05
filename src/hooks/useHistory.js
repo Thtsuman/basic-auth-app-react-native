@@ -7,8 +7,13 @@ export const useHistory = () => {
     navigation.navigate(page);
   };
 
+  const handleGoBack = () => {
+    navigation.goBack()
+  }
+
   return {
     handleNavigation,
+    handleGoBack
   };
 };
 

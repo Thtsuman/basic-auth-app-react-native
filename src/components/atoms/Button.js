@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import {Button as ButtonComp, useTheme} from 'react-native-paper';
 
-export function Button({btnLabel, theme = 'primary', onPress}) {
+export function Button({btnLabel, theme = 'primary', onPress, isLoading}) {
   const rnTheme = useTheme();
   const styles = makeStyles(rnTheme);
   return (
@@ -12,8 +12,12 @@ export function Button({btnLabel, theme = 'primary', onPress}) {
         styles.buttonWrapper,
         theme === 'primary' && styles.primaryButton,
         theme === 'secondary' && styles.secondaryButton,
+        isLoading && styles.loadingStyles
       ]}
-      mode="contained">
+      mode="contained"
+      loading={isLoading}
+      disabled={isLoading}
+      >
       {btnLabel}
     </ButtonComp>
   );
@@ -33,4 +37,8 @@ const makeStyles = theme =>
       backgroundColor: theme.colors.customSecondary,
       textColor: theme.colors.onCustomSecondary,
     },
+    loadingStyles: {
+      opacity: 0.7,
+      textColor: theme.colors.white
+    }
   });

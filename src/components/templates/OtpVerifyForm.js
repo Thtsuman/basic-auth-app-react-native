@@ -49,7 +49,7 @@ export function OtpVerifyForm() {
       <View style={styles.buttonWrapper}>
         <Button
           btnLabel={'Verify'}
-          onPress={() => handleNavigation(ScreensName.OtpVerification)}
+          onPress={() => handleNavigation(ScreensName.Search)}
         />
       </View>
     </View>
