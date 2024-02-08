@@ -5,4 +5,5 @@ export {
   SearchTabButton,
   SearchForm,
   OrderCard,
+  OrderDetailsTable,
 } from './templates';

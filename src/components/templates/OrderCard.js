@@ -2,8 +2,11 @@ import {View} from 'react-native';
 import React from 'react';
 import {Card, Divider, Text} from 'react-native-paper';
 import {Button} from '..';
+import {useHistory} from '../../hooks';
+import {ScreensName} from '../../screens';
 
 export function OrderCard() {
+  const {handleNavigation} = useHistory();
   return (
     <Card style={{marginTop: 10}}>
       <Card.Title titleVariant="headlineSmall" title="DDNA04198" />
@@ -41,7 +44,10 @@ export function OrderCard() {
           </Text>
         </View>
         <Divider />
-        <Button btnLabel="Expand" />
+        <Button
+          onPress={() => handleNavigation(ScreensName.OrderDetails)}
+          btnLabel="Expand"
+        />
       </Card.Content>
     </Card>
   );

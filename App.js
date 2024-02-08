@@ -1,11 +1,9 @@
 import * as React from 'react';
 import {NavigationWrapper} from './src/navigation';
-import {AppWrapper} from './src/wrappers';
+// import DeviceInfo from 'react-native-device-info';
 
 function App() {
-  return (
-      <NavigationWrapper />
-  );
+  return <NavigationWrapper />;
 }
 
 export default App;

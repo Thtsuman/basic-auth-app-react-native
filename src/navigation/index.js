@@ -7,6 +7,7 @@ import {
   OtpVerification,
   Search,
   OrderList,
+  OrderDetails,
 } from '../screens';
 
 const Stack = createNativeStackNavigator();
@@ -15,7 +16,7 @@ export function NavigationWrapper() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={ScreensName.OtpVerification}
+        initialRouteName={ScreensName.Home}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name={ScreensName.Home} component={HomeScreen} />
         <Stack.Screen name={ScreensName.Login} component={Login} />
@@ -25,6 +26,10 @@ export function NavigationWrapper() {
         />
         <Stack.Screen name={ScreensName.Search} component={Search} />
         <Stack.Screen name={ScreensName.OrderList} component={OrderList} />
+        <Stack.Screen
+          name={ScreensName.OrderDetails}
+          component={OrderDetails}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
