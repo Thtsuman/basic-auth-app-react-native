@@ -1,18 +1,21 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React, {useContext} from 'react';
 import {Appbar, PaperProvider, useTheme} from 'react-native-paper';
-import { useHistory } from '../hooks';
-
-// const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
+import {useHistory} from '../hooks';
+import {ScreensName} from '../screens';
+import {AuthContext} from '../contexts';
 
 export function AppBarHeader({pageName, haveBackButton}) {
   const theme = useTheme();
-  const {handleGoBack} = useHistory()
-  
+  const {handleGoBack} = useHistory();
+  const {handleNavigation} = useHistory();
+  const {
+    methods: {handleLogoutUser},
+  } = useContext(AuthContext);
 
-  // const [visible, setIsVisible] = useState(true);
-
-
+  const handleUserLogout = async () => {
+    handleLogoutUser();
+    handleNavigation(ScreensName.Login);
+  };
 
   return (
     <PaperProvider>
@@ -22,29 +25,8 @@ export function AppBarHeader({pageName, haveBackButton}) {
         <Appbar.Action
           iconColor={theme.colors.error}
           icon={'logout'}
-          onPress={() => setIsVisible(true)}
+          onPress={handleUserLogout}
         />
-        {/* <View>
-          <Menu
-            visible={visible}
-            onDismiss={() => setIsVisible(false)}
-            anchor={
-              <Appbar.Action
-                icon={MORE_ICON}
-                onPress={() => setIsVisible(true)}
-              />
-            }>
-            <View
-              style={{
-                zIndex: 1,
-
-              }}>
-              <Menu.Item onPress={() => {}} title="Item 1" />
-              <Menu.Item onPress={() => {}} title="Item 2" />
-              <Menu.Item onPress={() => {}} title="Item 3" />
-            </View>
-          </Menu>
-        </View> */}
       </Appbar.Header>
     </PaperProvider>
   );

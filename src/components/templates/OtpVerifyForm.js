@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   CodeField,
   Cursor,
@@ -45,9 +45,19 @@ export function OtpVerifyForm() {
     setIsLoading(false);
   };
 
-  // if (!userId) {
-  //   handleNavigation(ScreensName.Login);
-  // }
+  const handleResetCompState = () => {
+    setValue('');
+    setIsLoading(false);
+    setIsError(false);
+  };
+
+  useEffect(() => {
+    if (!userId) {
+      handleNavigation(ScreensName.Login);
+    }
+
+    return () => handleResetCompState();
+  }, []);
 
   return (
     <View style={styles.otpVerifyFormWrapper}>

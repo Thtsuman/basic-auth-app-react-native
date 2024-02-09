@@ -1,5 +1,5 @@
 import {View, StyleSheet} from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Fonts} from '../../assets/theme';
 import {Button, Field, Link} from '..';
 import {ScreensName} from '../../screens';
@@ -7,6 +7,11 @@ import {useTheme} from 'react-native-paper';
 import {useHistory} from '../../hooks';
 import {loginUser} from '../../api';
 import {AuthContext} from '../../contexts';
+
+const INIT_FORM_STATE = {
+  user_id: '10706',
+  password: 'test@123',
+};
 
 export const LoginForm = () => {
   const theme = useTheme();
@@ -18,10 +23,7 @@ export const LoginForm = () => {
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [formState, setFormState] = useState({
-    user_id: '10706',
-    password: 'test@123',
-  });
+  const [formState, setFormState] = useState(INIT_FORM_STATE);
 
   const handleFormChange = ({key, value}) => {
     setIsError(false);
@@ -42,6 +44,16 @@ export const LoginForm = () => {
     }
     setIsLoading(false);
   };
+
+  const handleResetCompState = () => {
+    setFormState(INIT_FORM_STATE);
+    setIsLoading(false);
+    setIsError(false);
+  };
+
+  useEffect(() => {
+    return handleResetCompState();
+  }, []);
 
   return (
     <>

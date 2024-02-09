@@ -49,7 +49,3 @@ export const otpVerify = async formState => {
     data: content.Payload[0],
   };
 };
-
-export const logoutUser = () => {
-  
-}
