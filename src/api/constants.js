@@ -1,0 +1,1 @@
+export const base_url = 'http://125.63.91.74:9114'

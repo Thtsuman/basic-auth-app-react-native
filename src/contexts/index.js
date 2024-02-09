@@ -1,1 +1,2 @@
-export {SearchContextProvider, SearchContext} from './searchContext';
+export {SearchContext, SearchContextProvider} from './searchContext';
+export {AuthContext, AuthContextProvider} from './authContext';

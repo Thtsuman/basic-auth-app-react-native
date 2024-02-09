@@ -7,8 +7,12 @@ import { useHistory } from '../hooks';
 
 export function AppBarHeader({pageName, haveBackButton}) {
   const theme = useTheme();
-  const [visible, setIsVisible] = useState(true);
   const {handleGoBack} = useHistory()
+  
+
+  // const [visible, setIsVisible] = useState(true);
+
+
 
   return (
     <PaperProvider>

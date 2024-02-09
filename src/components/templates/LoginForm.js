@@ -1,27 +1,70 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import React, {useContext, useState} from 'react';
 import {Fonts} from '../../assets/theme';
 import {Button, Field, Link} from '..';
 import {ScreensName} from '../../screens';
-import {useNavigation} from '@react-navigation/native';
 import {useTheme} from 'react-native-paper';
 import {useHistory} from '../../hooks';
+import {loginUser} from '../../api';
+import {AuthContext} from '../../contexts';
 
 export const LoginForm = () => {
   const theme = useTheme();
   const styles = makeStyles(theme);
   const {handleNavigation} = useHistory();
 
+  const {
+    methods: {setLoginData},
+  } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [formState, setFormState] = useState({
+    user_id: '10706',
+    password: 'test@123',
+  });
+
+  const handleFormChange = ({key, value}) => {
+    setIsError(false);
+    setFormState({
+      ...formState,
+      [key]: value,
+    });
+  };
+
+  const handleLogin = async () => {
+    setIsLoading(true);
+    const response = await loginUser(formState);
+    if (response.error) {
+      setIsError(true);
+    } else {
+      setLoginData(response.data);
+      handleNavigation(ScreensName.OtpVerification);
+    }
+    setIsLoading(false);
+  };
+
   return (
     <>
       <View style={styles.formContainer}>
-        <Field label="Phone Number" />
         <Field
+          handleChange={handleFormChange}
+          value={formState.user_id}
+          id="user_id"
+          label="User ID"
+          error={isError}
+        />
+        <Field
+          id="password"
           label="Password"
           type="password"
           secureTextEntry
           placeholder="Password"
+          value={formState.password}
+          handleChange={handleFormChange}
+          error={isError}
         />
+
+        {/* Forget password */}
         {/* <View style={styles.forgetPasswordSection}>
           <Link
             onPress={() => alert('Forgot password')}
@@ -29,9 +72,11 @@ export const LoginForm = () => {
             linkLabelColor={theme.colors.offBlack}
           />
         </View> */}
+
         <Button
           btnLabel={'Login'}
-          onPress={() => handleNavigation(ScreensName.OtpVerification)}
+          onPress={handleLogin}
+          isLoading={isLoading}
         />
       </View>
       <View style={styles.formFooter}>

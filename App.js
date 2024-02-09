@@ -1,9 +1,13 @@
 import * as React from 'react';
 import {NavigationWrapper} from './src/navigation';
-// import DeviceInfo from 'react-native-device-info';
+import {AuthContextProvider} from './src/contexts';
 
 function App() {
-  return <NavigationWrapper />;
+  return (
+    <AuthContextProvider>
+      <NavigationWrapper />
+    </AuthContextProvider>
+  );
 }
 
 export default App;

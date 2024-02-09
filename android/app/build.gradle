@@ -84,10 +84,10 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('your_key_name.keystore')
-            storePassword System.console().readPassword('\nKeystore password:')
-            keyAlias System.console().readPassword('\nAlias: ')
-            keyPassword System.console().readPassword('\nAlias password: ')
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
         }
     }
     buildTypes {

@@ -2,18 +2,19 @@ import {StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import {TextInput, useTheme} from 'react-native-paper';
 
-export function Field({label, placeholder, ...restProps}) {
+export function Field({label, placeholder, handleChange, id, isError, ...restProps}) {
   const theme = useTheme();
   const styles = makeStyles(theme);
-  const [text, setText] = useState('');
+  // const [text, setText] = useState('');
   return (
     <TextInput
+      id={id}
       mode="outlined"
       label={label}
       placeholder={placeholder}
-      value={text}
-      onChangeText={text => setText(text)}
+      onChangeText={text => handleChange({key: id, value: text})}
       style={styles.textInputContainer}
+      error={isError}
       {...restProps}
     />
   );
