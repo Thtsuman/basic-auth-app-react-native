@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 import {Background} from '../containers';
 import {Fonts, Metrics} from '../assets/theme';
@@ -6,14 +6,29 @@ import {Link, OtpVerifyForm} from '../components';
 import {useTheme} from 'react-native-paper';
 import {ScreensName} from '.';
 import {useHistory} from '../hooks';
+import {resendOtp} from '../api';
+import {AuthContext} from '../contexts';
 
 export function OtpVerification() {
   const theme = useTheme();
   const styles = makeStyles(theme);
   const {handleNavigation} = useHistory();
+  const {userId, userMobileNo} = useContext(AuthContext);
 
-  const showAlert = () => {
-    Alert.alert('', 'OTP Send');
+  const showAlert = msg => {
+    Alert.alert('', msg);
+  };
+
+  const handleResendOtp = async () => {
+    const response = await resendOtp({
+      user_id: userId,
+      user_mobile: userMobileNo,
+    });
+    if (response.error) {
+      showAlert('Something went wrong');
+    } else {
+      showAlert('OTP Send');
+    }
   };
 
   return (
@@ -28,13 +43,13 @@ export function OtpVerification() {
         <OtpVerifyForm />
         <View style={styles.formFooter}>
           <Link
-            onPress={showAlert}
+            onPress={handleResendOtp}
             linkLabel="Resend OTP"
             linkLabelColor={theme.colors.background}
           />
           <Link
             onPress={() => handleNavigation(ScreensName.Login)}
-            linkLabel="Change phone number?"
+            linkLabel="Change User ID?"
             linkLabelColor={theme.colors.background}
           />
         </View>

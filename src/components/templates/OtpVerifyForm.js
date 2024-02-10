@@ -14,7 +14,7 @@ import {otpVerify} from '../../api';
 import {AuthContext} from '../../contexts';
 
 export function OtpVerifyForm() {
-  const {handleNavigation} = useHistory();
+  const {handleNavigation, navigation} = useHistory();
   const {userId} = useContext(AuthContext);
   const theme = useTheme();
   const styles = makeStyles(theme);
@@ -55,9 +55,13 @@ export function OtpVerifyForm() {
     if (!userId) {
       handleNavigation(ScreensName.Login);
     }
-
-    return () => handleResetCompState();
   }, []);
+
+  useEffect(() => {
+    return navigation.addListener('focus', () => {
+      handleResetCompState();
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.otpVerifyFormWrapper}>

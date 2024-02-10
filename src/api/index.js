@@ -1,1 +1,1 @@
-export {loginUser, otpVerify} from './auth';
+export {loginUser, otpVerify, resendOtp} from './auth';

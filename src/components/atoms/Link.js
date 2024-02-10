@@ -3,7 +3,13 @@ import React from 'react';
 import {Fonts} from '../../assets/theme';
 import {useTheme} from 'react-native-paper';
 
-export function Link({linkLabel, linkLabelColor = 'white', onPress, preText}) {
+export function Link({
+  linkLabel,
+  linkLabelColor = 'white',
+  onPress,
+  preText,
+  isLoading = true,
+}) {
   const theme = useTheme();
   const styles = makeStyles(theme);
   return (

@@ -1,10 +1,10 @@
 import {createContext, useState} from 'react';
-import {SearchButtonValue} from '../constants';
 
 const INITIAL_STATE = {
   isLoggedIn: false,
   loginData: {},
   userId: null,
+  userMobileNo: null,
 };
 
 export const AuthContext = createContext(INITIAL_STATE);
@@ -21,15 +21,14 @@ export const AuthContextProvider = ({children, initialData}) => {
       userId: obj?.t_usr,
       loginData: obj,
       isLoggedIn: true,
+      userMobileNo: obj?.t_mbno,
     });
   };
 
   const handleLogoutUser = () => {
     setAuthState({
       ...authState,
-      loginData: {},
-      isLoggedIn: false,
-      userId: null,
+      ...INITIAL_STATE,
     });
   };
 

@@ -9,8 +9,8 @@ import {loginUser} from '../../api';
 import {AuthContext} from '../../contexts';
 
 const INIT_FORM_STATE = {
-  user_id: '10706',
-  password: 'test@123',
+  user_id: '',
+  password: '',
 };
 
 export const LoginForm = () => {

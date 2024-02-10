@@ -1,7 +1,4 @@
-import {
-  useNavigation,
-  useNavigationState,
-} from '@react-navigation/native';
+import {useNavigation, useNavigationState} from '@react-navigation/native';
 
 export const useHistory = () => {
   const navigation = useNavigation();
@@ -17,5 +14,6 @@ export const useHistory = () => {
   return {
     handleNavigation,
     handleGoBack,
+    navigation,
   };
 };
