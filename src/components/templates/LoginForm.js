@@ -1,5 +1,5 @@
 import {View, StyleSheet} from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Fonts} from '../../assets/theme';
 import {Button, Field, Link} from '..';
 import {ScreensName} from '../../screens';
@@ -7,6 +7,7 @@ import {useTheme} from 'react-native-paper';
 import {useHistory} from '../../hooks';
 import {loginUser} from '../../api';
 import {AuthContext} from '../../contexts';
+import {useFocusEffect} from '@react-navigation/native';
 
 const INIT_FORM_STATE = {
   user_id: '',
@@ -51,9 +52,11 @@ export const LoginForm = () => {
     setIsError(false);
   };
 
-  useEffect(() => {
-    return handleResetCompState();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => handleResetCompState();
+    }, []),
+  );
 
   return (
     <>
