@@ -5,11 +5,11 @@ import {images} from '../assets';
 export const Background = ({children}) => {
   return (
     <View>
-      <ImageBackground
+      {/* <ImageBackground
         source={images.background}
         style={styles.imageBackground}
-      />
-      <View style={styles.overlay} />
+      /> */}
+      {/* <View style={styles.overlay} /> */}
       <View style={styles.childrenWrapper}>{children}</View>
     </View>
   );
@@ -20,10 +20,11 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   childrenWrapper: {
+    backgroundColor: 'white',
     position: 'absolute',
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#00000088'
-  }
+    backgroundColor: '#000000',
+  },
 });

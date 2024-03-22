@@ -110,6 +110,8 @@ const makeStyles = theme =>
       paddingVertical: 5,
       paddingHorizontal: 20,
       borderRadius: 10,
+      borderColor: 'black',
+      borderWidth: 1
     },
     codeFieldRoot: {marginTop: 20},
     cell: {

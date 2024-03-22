@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
-import {Background} from '../containers';
+import {AuthWrapper, Background} from '../containers';
 import {Fonts, Metrics} from '../assets/theme';
 import {Link, OtpVerifyForm} from '../components';
 import {useTheme} from 'react-native-paper';
@@ -32,29 +32,25 @@ export function OtpVerification() {
   };
 
   return (
-    <Background>
-      <View style={styles.loginContainer}>
-        <View style={styles.heroContainer}>
-          <Text style={styles.heading}>Verification</Text>
-          <Text style={styles.subHeading}>
-            Please enter the One Time Password we send to your phone number.
-          </Text>
-        </View>
-        <OtpVerifyForm />
-        <View style={styles.formFooter}>
-          <Link
-            onPress={handleResendOtp}
-            linkLabel="Resend OTP"
-            linkLabelColor={theme.colors.background}
-          />
-          <Link
-            onPress={() => handleNavigation(ScreensName.Login)}
-            linkLabel="Change User ID?"
-            linkLabelColor={theme.colors.background}
-          />
-        </View>
+    <AuthWrapper
+      subTitle={
+        'Please enter the One Time Password we send to your phone number.'
+      }
+      title={'Verification'}>
+      <OtpVerifyForm />
+      <View style={styles.formFooter}>
+        <Link
+          onPress={handleResendOtp}
+          linkLabel="Resend OTP"
+          linkLabelColor={theme.colors.black}
+        />
+        <Link
+          onPress={() => handleNavigation(ScreensName.Login)}
+          linkLabel="Change User ID?"
+          linkLabelColor={theme.colors.black}
+        />
       </View>
-    </Background>
+    </AuthWrapper>
   );
 }
 

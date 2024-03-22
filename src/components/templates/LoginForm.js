@@ -108,9 +108,11 @@ export const LoginForm = () => {
 const makeStyles = theme =>
   StyleSheet.create({
     formContainer: {
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.offWhite,
       padding: 20,
       borderRadius: 10,
+      borderColor: theme.offBlack,
+      borderWidth: 1,
     },
     forgetPasswordSection: {
       alignItems: 'flex-end',
