@@ -16,9 +16,9 @@ export function NavigationWrapper() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={ScreensName.OtpVerification}
+        initialRouteName={ScreensName.Login}
         screenOptions={{headerShown: false}}>
-        <Stack.Screen name={ScreensName.Home} component={HomeScreen} />
+        {/* <Stack.Screen name={ScreensName.Home} component={HomeScreen} /> */}
         <Stack.Screen name={ScreensName.Login} component={Login} />
         <Stack.Screen
           name={ScreensName.OtpVerification}

@@ -94,13 +94,13 @@ export const LoginForm = () => {
           isLoading={isLoading}
         />
       </View>
-      <View style={styles.formFooter}>
+      {/* <View style={styles.formFooter}>
         <Link
           onPress={() => handleNavigation(ScreensName.Home)}
           linkLabel="Home"
           linkLabelColor={theme.colors.background}
         />
-      </View>
+      </View> */}
     </>
   );
 };

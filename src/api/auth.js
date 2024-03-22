@@ -14,9 +14,7 @@ export const loginUser = async formState => {
   });
 
   const content = await rawResponse.json();
-  console.error({
-    content
-  })
+
   if (content.Error) {
     return {
       error: true,

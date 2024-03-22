@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "build": "cd android && gradlew clean && gradlew assembleRelease"
+    "build_release": "cd android && gradlew clean && gradlew assembleRelease",
+    "build_debug": "cd android && gradlew clean && gradlew assembleDebug"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.9",
