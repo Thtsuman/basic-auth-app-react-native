@@ -14,15 +14,15 @@ export const searchByOrderNo = async formState => {
   });
 
   const content = await rawResponse.json();
-  if (content.Error) {
+  if (content.Error || content.Payload?.length < 1) {
     return {
       error: true,
-      message: content.Message,
+      message: ORDER_NOT_FOUND_MSG,
     };
   }
   return {
     error: false,
-    data: content.Payload[0],
+    data: content.Payload,
   };
 };
 
@@ -39,15 +39,15 @@ export const searchByOrderName = async formState => {
   });
 
   const content = await rawResponse.json();
-  if (content.Error) {
+  if (content.Error || content.Payload?.length < 1) {
     return {
       error: true,
-      message: content.Message,
+      message: ORDER_NOT_FOUND_MSG,
     };
   }
   return {
     error: false,
-    data: content.Payload[0],
+    data: content.Payload,
   };
 };
 

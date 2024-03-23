@@ -14,12 +14,9 @@ export function AppBarHeader({pageName, haveBackButton}) {
   const {
     methods: {resetAppContextState},
   } = useContext(AppContext);
-  const {
-    methods: {resetSearchContextState},
-  } = useContext(SearchContext);
+
 
   const handleUserLogout = async () => {
-    resetSearchContextState();
     resetAppContextState();
     handleLogoutUser();
     handleNavigation(ScreensName.Login);

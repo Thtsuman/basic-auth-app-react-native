@@ -1,4 +1,4 @@
-import {Alert, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import {Searchbar, useTheme} from 'react-native-paper';
 import {Button} from '..';
@@ -8,20 +8,30 @@ import {searchByOrderName, searchByOrderNo} from '../../api';
 import {AppContext, AuthContext, SearchContext} from '../../contexts';
 import {ORDER_NOT_FOUND_MSG} from '../../api';
 import {SearchButtonValue} from '../../constants';
+import { useFocusEffect } from '@react-navigation/native';
 
 export function SearchForm() {
   const theme = useTheme();
   const styles = makeStyles(theme);
   const {handleNavigation} = useHistory();
   const {userId} = useContext(AuthContext);
-  const {searchTabValue} = useContext(SearchContext);
   const {
-    methods: {showAlert},
+    searchTabValue,
+    methods: {resetSearchContextState},
+  } = useContext(SearchContext);
+  const {
+    methods: {showAlert, setOrderList},
   } = useContext(AppContext);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => resetSearchContextState();
+    }, []),
+  );
 
   useEffect(() => {
     setSearchQuery('');
@@ -62,6 +72,7 @@ export function SearchForm() {
       }
       setIsError(true);
     } else {
+      setOrderList(responseFromApi.data);
       handleNavigation(ScreensName.OrderList);
     }
     setIsLoading(false);

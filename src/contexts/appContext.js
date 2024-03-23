@@ -6,6 +6,10 @@ const INITIAL_STATE = {
     message: null,
     title: null,
   },
+  orders: {
+    list: [],
+    totalOrderCount: null,
+  },
 };
 
 export const AppContext = createContext(INITIAL_STATE);
@@ -40,6 +44,15 @@ export const AppContextProvider = ({children, initialData}) => {
       },
     });
 
+  const setOrderList = orderList =>
+    setInitialState({
+      ...initialState,
+      orders: {
+        list: orderList,
+        totalOrderCount: orderList.length,
+      },
+    });
+
   return (
     <AppContext.Provider
       value={{
@@ -47,7 +60,8 @@ export const AppContextProvider = ({children, initialData}) => {
         methods: {
           showAlert,
           hideAlert,
-          resetAppContextState
+          resetAppContextState,
+          setOrderList,
         },
       }}>
       {children}
