@@ -1,4 +1,5 @@
 import {createContext, useState} from 'react';
+import {dummyOrderList} from '../dummyData/dummyOrderListData';
 
 const INITIAL_STATE = {
   alert: {
@@ -7,7 +8,8 @@ const INITIAL_STATE = {
     title: null,
   },
   orders: {
-    list: [],
+    // list: [],
+    list: dummyOrderList,
     totalOrderCount: null,
   },
 };
@@ -53,6 +55,12 @@ export const AppContextProvider = ({children, initialData}) => {
       },
     });
 
+  const resetOrderList = () =>
+    setInitialState({
+      ...initialState,
+      orders: INITIAL_STATE.orders,
+    });
+
   return (
     <AppContext.Provider
       value={{
@@ -62,6 +70,7 @@ export const AppContextProvider = ({children, initialData}) => {
           hideAlert,
           resetAppContextState,
           setOrderList,
+          resetOrderList,
         },
       }}>
       {children}

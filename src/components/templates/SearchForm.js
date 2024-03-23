@@ -8,7 +8,7 @@ import {searchByOrderName, searchByOrderNo} from '../../api';
 import {AppContext, AuthContext, SearchContext} from '../../contexts';
 import {ORDER_NOT_FOUND_MSG} from '../../api';
 import {SearchButtonValue} from '../../constants';
-import { useFocusEffect } from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 
 export function SearchForm() {
   const theme = useTheme();
@@ -89,6 +89,7 @@ export function SearchForm() {
         />
       </View>
       <Button
+        isMuted={!searchQuery.length}
         btnLabel={'Search'}
         theme="secondary"
         isLoading={isLoading}

@@ -3,12 +3,12 @@ import React from 'react';
 import {useTheme} from 'react-native-paper';
 import {AppBarHeader} from '.';
 
-export function PageWrapper({currentPage, haveBackButton, children}) {
+export function PageWrapper({currentPage, haveBackButton, children, scrollRef}) {
   const theme = useTheme();
   const styles = makeStyles(theme);
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView ref={scrollRef} style={styles.scrollView}>
         <AppBarHeader haveBackButton={haveBackButton} pageName={currentPage} />
         <View style={styles.viewContainer}>{children}</View>
       </ScrollView>
