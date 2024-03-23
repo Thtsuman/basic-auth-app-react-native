@@ -1,16 +1,71 @@
-import {StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import {Alert, StyleSheet, View} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
 import {Searchbar, useTheme} from 'react-native-paper';
 import {Button} from '..';
 import {useHistory} from '../../hooks';
 import {ScreensName} from '../../screens';
+import {searchByOrderName, searchByOrderNo} from '../../api';
+import {AppContext, AuthContext, SearchContext} from '../../contexts';
+import {ORDER_NOT_FOUND_MSG} from '../../api';
+import {SearchButtonValue} from '../../constants';
 
 export function SearchForm() {
   const theme = useTheme();
   const styles = makeStyles(theme);
   const {handleNavigation} = useHistory();
+  const {userId} = useContext(AuthContext);
+  const {searchTabValue} = useContext(SearchContext);
+  const {
+    methods: {showAlert},
+  } = useContext(AppContext);
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    setSearchQuery('');
+  }, [searchTabValue]);
+
+  const callSearchOrderByNo = async () => {
+    const response = await searchByOrderNo({
+      user_id: userId,
+      order_no: searchQuery,
+    });
+
+    return response;
+  };
+
+  const callSearchOrderByName = async () => {
+    const response = await searchByOrderName({
+      user_id: userId,
+      name: searchQuery,
+    });
+
+    return response;
+  };
+
+  const handleSearch = async () => {
+    setIsLoading(true);
+    let responseFromApi;
+    if (searchTabValue === SearchButtonValue.orderNo) {
+      responseFromApi = await callSearchOrderByNo();
+    } else if (searchTabValue === SearchButtonValue.customer) {
+      responseFromApi = await callSearchOrderByName();
+    }
+
+    if (responseFromApi.error) {
+      if (responseFromApi.message === ORDER_NOT_FOUND_MSG) {
+        showAlert({
+          message: ORDER_NOT_FOUND_MSG,
+        });
+      }
+      setIsError(true);
+    } else {
+      handleNavigation(ScreensName.OrderList);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <View>
@@ -25,7 +80,8 @@ export function SearchForm() {
       <Button
         btnLabel={'Search'}
         theme="secondary"
-        onPress={() => handleNavigation(ScreensName.OrderList)}
+        isLoading={isLoading}
+        onPress={handleSearch}
       />
     </View>
   );

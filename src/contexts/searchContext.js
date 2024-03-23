@@ -2,7 +2,7 @@ import {createContext, useState} from 'react';
 import {SearchButtonValue} from '../constants';
 
 const INITIAL_STATE = {
-  searchTabValue: SearchButtonValue.dd,
+  searchTabValue: SearchButtonValue.orderNo,
 };
 
 export const SearchContext = createContext(INITIAL_STATE);
@@ -12,6 +12,10 @@ export const SearchContextProvider = ({children, initialData}) => {
     ...INITIAL_STATE,
     ...initialData,
   });
+
+  const resetSearchContextState = () => {
+    setInitialState(INITIAL_STATE);
+  };
 
   const setSearchTab = tab =>
     setInitialState({
@@ -25,6 +29,7 @@ export const SearchContextProvider = ({children, initialData}) => {
         ...initialState,
         methods: {
           setSearchTab,
+          resetSearchContextState,
         },
       }}>
       {children}

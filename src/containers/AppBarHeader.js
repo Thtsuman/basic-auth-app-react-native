@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Appbar, PaperProvider, useTheme} from 'react-native-paper';
 import {useHistory} from '../hooks';
 import {ScreensName} from '../screens';
-import {AuthContext} from '../contexts';
+import {AppContext, AuthContext, SearchContext} from '../contexts';
 
 export function AppBarHeader({pageName, haveBackButton}) {
   const theme = useTheme();
@@ -11,8 +11,16 @@ export function AppBarHeader({pageName, haveBackButton}) {
   const {
     methods: {handleLogoutUser},
   } = useContext(AuthContext);
+  const {
+    methods: {resetAppContextState},
+  } = useContext(AppContext);
+  const {
+    methods: {resetSearchContextState},
+  } = useContext(SearchContext);
 
   const handleUserLogout = async () => {
+    resetSearchContextState();
+    resetAppContextState();
     handleLogoutUser();
     handleNavigation(ScreensName.Login);
   };

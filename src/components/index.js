@@ -1,4 +1,4 @@
-export {Button, Field, Link} from './atoms';
+export {Button, Field, Link, Alert} from './atoms';
 export {
   LoginForm,
   OtpVerifyForm,

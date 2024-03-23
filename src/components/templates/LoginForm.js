@@ -1,7 +1,7 @@
 import {View, StyleSheet} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {Fonts} from '../../assets/theme';
-import {Button, Field, Link} from '..';
+import {Button, Field} from '..';
 import {ScreensName} from '../../screens';
 import {useTheme} from 'react-native-paper';
 import {useHistory} from '../../hooks';
@@ -94,13 +94,6 @@ export const LoginForm = () => {
           isLoading={isLoading}
         />
       </View>
-      {/* <View style={styles.formFooter}>
-        <Link
-          onPress={() => handleNavigation(ScreensName.Home)}
-          linkLabel="Home"
-          linkLabelColor={theme.colors.background}
-        />
-      </View> */}
     </>
   );
 };

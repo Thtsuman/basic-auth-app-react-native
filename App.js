@@ -1,11 +1,15 @@
 import * as React from 'react';
 import {NavigationWrapper} from './src/navigation';
-import {AuthContextProvider} from './src/contexts';
+import {AppContextProvider, AuthContextProvider} from './src/contexts';
+import {Alert} from './src/components';
 
 function App() {
   return (
     <AuthContextProvider>
-      <NavigationWrapper />
+      <AppContextProvider>
+        <NavigationWrapper />
+        <Alert />
+      </AppContextProvider>
     </AuthContextProvider>
   );
 }

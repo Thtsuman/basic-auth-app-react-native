@@ -1,12 +1,12 @@
 export const SearchButtonValue = {
-  dd: 'dd',
+  orderNo: 'orderNo',
   customer: 'customer',
 };
 
 export const SearchTabButtons = [
   {
-    value: SearchButtonValue.dd,
-    label: 'DD',
+    value: SearchButtonValue.orderNo,
+    label: 'DD No.',
   },
   {
     value: SearchButtonValue.customer,

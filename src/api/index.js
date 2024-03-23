@@ -4,3 +4,6 @@ export {
   searchByOrderName,
   searchByOrderNo,
 } from './order';
+export {
+  ORDER_NOT_FOUND_MSG
+} from './constants'
