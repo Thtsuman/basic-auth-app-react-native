@@ -40,7 +40,7 @@ export function SearchForm() {
   const callSearchOrderByNo = async () => {
     const response = await searchByOrderNo({
       user_id: userId,
-      order_no: searchQuery,
+      order_no: searchQuery.toUpperCase(),
     });
 
     return response;
@@ -49,7 +49,7 @@ export function SearchForm() {
   const callSearchOrderByName = async () => {
     const response = await searchByOrderName({
       user_id: userId,
-      name: searchQuery,
+      name: searchQuery.toUpperCase(),
     });
 
     return response;
