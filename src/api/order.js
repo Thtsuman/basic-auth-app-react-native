@@ -14,7 +14,12 @@ export const searchByOrderNo = async formState => {
   });
 
   const content = await rawResponse.json();
-  if (content.Error || content.Payload?.length < 1) {
+  if (content.Error) {
+    return {
+      error: true,
+      message: content.Message,
+    };
+  } else if (content.Payload?.length < 1) {
     return {
       error: true,
       message: ORDER_NOT_FOUND_MSG,
@@ -37,9 +42,13 @@ export const searchByOrderName = async formState => {
     },
     body: JSON.stringify({...formState, device_id: deviceId}),
   });
-
   const content = await rawResponse.json();
-  if (content.Error || content.Payload?.length < 1) {
+  if (content.Error) {
+    return {
+      error: true,
+      message: content.Message,
+    };
+  } else if (content.Payload?.length < 1) {
     return {
       error: true,
       message: ORDER_NOT_FOUND_MSG,
@@ -64,6 +73,7 @@ export const findFinalListingById = async formState => {
   });
 
   const content = await rawResponse.json();
+
   if (content.Error) {
     return {
       error: true,
@@ -72,6 +82,6 @@ export const findFinalListingById = async formState => {
   }
   return {
     error: false,
-    data: content.Payload[0],
+    data: content.Payload,
   };
 };

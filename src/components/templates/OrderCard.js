@@ -38,12 +38,18 @@ export function OrderCard({order}) {
           style={{
             marginTop: 10,
           }}>
-          <Text style={{paddingBottom: 6}} variant="titleSmall">Description</Text>
+          <Text style={{paddingBottom: 6}} variant="titleSmall">
+            Description
+          </Text>
           <Text variant="bodyMedium">{order?.t_idsca}</Text>
         </View>
         <Divider />
         <Button
-          onPress={() => handleNavigation(ScreensName.OrderDetails)}
+          onPress={() =>
+            handleNavigation(ScreensName.OrderDetails, {
+              orderDetails: order,
+            })
+          }
           btnLabel="Expand"
         />
       </Card.Content>

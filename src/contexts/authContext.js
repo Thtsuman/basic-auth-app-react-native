@@ -3,8 +3,7 @@ import {createContext, useState} from 'react';
 const INITIAL_STATE = {
   isLoggedIn: false,
   loginData: {},
-  // userId: null,
-  userId: '10706',
+  userId: null,
   userMobileNo: null,
 };
 

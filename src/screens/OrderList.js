@@ -1,17 +1,13 @@
-import React, {useCallback, useContext, useRef, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import {PageWrapper} from '../containers';
 import {OrderCard} from '../components';
-import {useFocusEffect} from '@react-navigation/native';
 import {AppContext} from '../contexts';
 import {DataTable} from 'react-native-paper';
 
-const numberOfItemsPerPage = 10;
+const numberOfItemsPerPage = 5;
 
 export function OrderList() {
-  const {
-    orders,
-    methods: {resetOrderList},
-  } = useContext(AppContext);
+  const {orders} = useContext(AppContext);
 
   const scrollRef = useRef();
 
@@ -25,15 +21,6 @@ export function OrderList() {
   const [page, setPage] = useState(0);
   const from = page * numberOfItemsPerPage;
   const to = Math.min((page + 1) * numberOfItemsPerPage, orders.list.length);
-
-  useFocusEffect(
-    useCallback(() => {
-      return () => {
-        setPage(0);
-        resetOrderList();
-      };
-    }, []),
-  );
 
   if (orders.list.length < 1) {
     return null;

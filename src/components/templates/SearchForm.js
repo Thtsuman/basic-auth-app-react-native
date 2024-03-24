@@ -63,11 +63,10 @@ export function SearchForm() {
     } else if (searchTabValue === SearchButtonValue.customer) {
       responseFromApi = await callSearchOrderByName();
     }
-
     if (responseFromApi.error) {
-      if (responseFromApi.message === ORDER_NOT_FOUND_MSG) {
+      if (responseFromApi.message) {
         showAlert({
-          message: ORDER_NOT_FOUND_MSG,
+          message: responseFromApi.message,
         });
       }
       setIsError(true);

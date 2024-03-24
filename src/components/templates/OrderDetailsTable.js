@@ -2,64 +2,12 @@ import React from 'react';
 import {Card, DataTable, Text} from 'react-native-paper';
 import moment from 'moment';
 
-export function OrderDetailsTable() {
-  const [items] = React.useState([
-    {
-      key: 1,
-      orderStatus: 'Customer Order',
-      actualDate: 356,
-      targetDate: 16,
-    },
-    {
-      key: 2,
-      orderStatus: 'Sales Order',
-      actualDate: 262,
-      targetDate: 16,
-    },
-    {
-      key: 3,
-      orderStatus: 'Technical and Comm. Clearance',
-      actualDate: 159,
-      targetDate: 6,
-    },
-    {
-      key: 4,
-      orderStatus: 'Submittal',
-      actualDate: 305,
-      targetDate: 3.7,
-    },
-    {
-      key: 5,
-      orderStatus: 'Final Approve',
-      actualDate: 305,
-      targetDate: 3.7,
-    },
-    {
-      key: 6,
-      orderStatus: 'Release',
-      actualDate: 305,
-      targetDate: 3.7,
-    },
-    {
-      key: 7,
-      orderStatus: 'Purchase Requisition',
-      actualDate: 305,
-      targetDate: 3.7,
-    },
-    {
-      key: 8,
-      orderStatus: 'Purchase Order',
-      actualDate: 305,
-      targetDate: 3.7,
-    },
-    {
-      key: 9,
-      orderStatus: 'MFG Drawing',
-      actualDate: 305,
-      targetDate: 3.7,
-    },
-  ]);
-
+export function OrderDetailsTable({data}) {
+  const checkForDate = date => {
+    if (date !== 'NA') {
+      return moment(date).format('YYYY-MM-DD');
+    } else return <Text>NA</Text>;
+  };
   return (
     <Card>
       <DataTable>
@@ -69,23 +17,18 @@ export function OrderDetailsTable() {
           <DataTable.Title numeric>Actual Date</DataTable.Title>
         </DataTable.Header>
 
-        {items.map(item => (
-          <DataTable.Row style={{height: 'auto'}} key={item.key}>
+        {data?.map((item, key) => (
+          <DataTable.Row style={{height: 'auto'}} key={key}>
             <DataTable.Cell>
-              {/* {item.targetDate} */}
-              <Text variant="bodySmall">
-                {moment('20111031').format('YYYY-MM-DD')}
-              </Text>
+              <Text variant="bodySmall">{checkForDate(item?.target_date)}</Text>
             </DataTable.Cell>
             <DataTable.Cell>
               <Text variant="bodySmall" numberOfLines={2}>
-                {item.orderStatus}
+                {item.t_mdsca}
               </Text>
             </DataTable.Cell>
             <DataTable.Cell numeric>
-              <Text variant="bodySmall">
-                {moment('20111031').format('YYYY-MM-DD')}
-              </Text>
+              <Text variant="bodySmall">{checkForDate(item?.actual_date)}</Text>
             </DataTable.Cell>
           </DataTable.Row>
         ))}
